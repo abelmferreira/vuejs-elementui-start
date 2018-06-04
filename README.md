@@ -10,3 +10,9 @@ Uses element-ui for styles and has a responsive menu (non-existent in element-ui
 It has a simple layer to protect routes that need authentication.
 
 And small helper for sending notifications messages to user with vuex and element-ui
+
+## Try it
+````
+npm install
+npm run dev
+````
