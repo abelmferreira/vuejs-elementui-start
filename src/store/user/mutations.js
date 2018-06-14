@@ -1,10 +1,10 @@
 export default {
   setLoggedin (state, payload) {
-    state.user.loggedin = payload
+    state.loggedin = payload
   },
   setUserLogout (state) {
-    state.user.loggedin = false
-    state.user.token = null
-    state.user.profile = null
+    state.loggedin = false
+    state.token = null
+    state.user = null
   }
 }

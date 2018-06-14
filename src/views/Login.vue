@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="loginbox">
       <h1>Login</h1>
       <el-form ref="loginForm" :model="form" :rules="rules" label-width="0px">
 
@@ -12,15 +12,16 @@
           <div class="form-input-extra-option" ><a @click="resetPassword" class="form-input-extra-option-link">Esqueceu a senha?</a> </div>
         </el-form-item>
 
-        <div class="actions-buttons actions-buttons-fullWidth">
+        <div class="actions-buttons">
           <el-button type="primary" @click="login">Entrar</el-button>
+          <el-button type="secondary" @click="signin">Cadastrar</el-button>
         </div>
       </el-form>
     </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapMutations, mapState} from 'vuex'
 
 export default {
   name: 'Login',
@@ -41,15 +42,7 @@ export default {
     }
   },
   computed: {
-    loggedin () {
-      return this.$store.getters.user.loggedin
-    },
-    user () {
-      return this.$store.getters.user
-    },
-    token () {
-      return this.$store.getters.user.token
-    }
+    ...mapState('User', ['loggedin', 'user', 'token'])
   },
   watch: {
     loggedin (value) {
@@ -62,18 +55,21 @@ export default {
         if (valid) this.userLogin(this.form)
       })
     },
-    logout () {
-      this.userLogout()
+    signin () {
+      this.addMessage('In development!')
     },
     resetPassword () {
-      this.addMessage('Contate o adm para trocar a senha')
+      this.addMessage('In development!')
     },
-    ...mapActions([
-      'userLogin',
-      'userLogout',
-      'setError',
-      'addMessage'
-    ])
+    ...mapActions('User', ['userLogin']),
+    ...mapMutations('Alerts', ['addMessage'])
   }
 }
 </script>
+
+<style>
+.loginbox {
+  max-width: 300px;
+  margin: auto;
+}
+</style>

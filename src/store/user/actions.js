@@ -1,15 +1,14 @@
 export default {
-  setLoggedin ({commit}, payload) {
-    commit('setLoggedin', payload)
-  },
   userLogin ({commit}, payload) {
-    commit('setLoadingMessage', 'Autenticando usuário')
+    commit('Alerts/setLoadingMessage', 'Autenticando usuário', {root: true})
+
     setTimeout(() => {
       commit('setLoggedin', true)
-      commit('setLoadingMessage')
+      commit('Alerts/setLoadingMessage', null, {root: true})
     }, 1500)
   },
+
   userLogout ({commit}) {
-    commit('setUserLogout')
+    commit('setUserLogout', null)
   }
 }

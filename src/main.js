@@ -17,12 +17,12 @@ Vue.config.productionTip = false
 Vue.use(ElementUI, {locale})
 
 router.beforeEach((to, from, next) => {
-  if ((to.meta.requiresAuth && store.getters.user.loggedin) || to.path.startsWith('/login')) {
+  if ((to.meta.requiresAuth && store.state.loggedin) || to.path.startsWith('/login')) {
     next()
   } else if (!to.meta.requiresAuth) {
     next()
   } else {
-    store.dispatch('setError', 'Necessário fazer login para continuar')
+    store.commit('Alerts/setError', 'Necessário fazer login para continuar')
     next('/login')
   }
 })

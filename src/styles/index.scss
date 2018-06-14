@@ -1,5 +1,4 @@
 @import '@/config/variables.scss';
-@import './element-ui.scss';
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -38,6 +37,7 @@ a {
 
 .actions-buttons button {
   margin-bottom: 10px;
+  margin-right: 10px;
   margin-left: 0px;
   width: 160px;
 }
@@ -74,4 +74,25 @@ a {
   line-height: 20px;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* altera o width padrão do componente message do element.io */
+.el-message {
+  min-width: 85%;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.el-message-box {
+  width: 85% !important;
+}
+
+/* altera o footer do element.io */
+.el-footer {
+  position: absolute;
+  bottom:0;
+  width:100%;
+  border-top: solid 1px #e6e6e6;
+  text-align: center;
+  font-size: 12px;
 }

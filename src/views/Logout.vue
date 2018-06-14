@@ -7,14 +7,12 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 export default {
   name: 'Logout',
   computed: {
-    loggedin () {
-      return this.$store.getters.user.loggedin
-    }
+    ...mapState('User', ['loggedin'])
   },
   watch: {
     loggedin (value) {
@@ -26,7 +24,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['userLogout'])
+    ...mapActions('User', ['userLogout'])
   },
   mounted () {
     this.userLogout()

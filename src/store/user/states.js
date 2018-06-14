@@ -1,7 +1,5 @@
 export default {
-  user: {
-    loggedin: false,
-    token: null,
-    profile: null
-  }
+  loggedin: false,
+  token: null,
+  user: null
 }

@@ -58,8 +58,6 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
-
 export default {
   data () {
     return {
@@ -120,8 +118,7 @@ export default {
     logoClick () {
       this.removeActiveMenuMark(['el-menu', 'el-menulogin'])
       this.$router.push('/')
-    },
-    ...mapActions(['setLoggedin'])
+    }
   },
   mounted () {
     window.addEventListener('resize', this.handleResize)
@@ -193,13 +190,25 @@ export default {
     vertical-align: middle;
   }
 
+  #bellicon {
+    display: inline-block;
+    position: relative;
+    right: 20px;
+    top: 14px;
+    z-index: 999;
+    width: 35px;
+    height: 40px;
+    cursor: pointer;
+    float: right;
+  }
+
   #toggleButton {
     display: inline-block;
     position: absolute;
     right: 20px;
     top: 14px;
     z-index: 999;
-    width: 40px;
+    width: 35px;
     height: 40px;
     cursor: pointer;
     float: right;

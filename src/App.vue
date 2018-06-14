@@ -11,7 +11,7 @@
       <router-view/>
     </el-main>
 
-    <el-footer>
+    <el-footer :height="this.gVar.footerHeight">
       footer
     </el-footer>
 
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import {mapMutations, mapState} from 'vuex'
 import HeaderBar from '@/components/HeaderBar'
 
 export default {
@@ -32,20 +32,13 @@ export default {
     }
   },
   computed: {
-    loggedin () {
-      return this.$store.getters.user.loggedin
-    },
-    loading () {
-      return this.$store.getters.messages.loading
-    },
-    messages () {
-      return this.$store.getters.messages.messages
-    },
-    error () {
-      return this.$store.getters.messages.error
-    }
+    ...mapState('User', ['loggedin']),
+    ...mapState('Alerts', ['loading', 'messages', 'error'])
   },
   watch: {
+    error (value) {
+      if (value) this.$message({type: 'error', message: value, showClose: true, onClose: this.clearError, duration: 10000})
+    },
     loading (value) {
       if (value) {
         this.loadingScreen = this.$loading({
@@ -60,30 +53,24 @@ export default {
     },
     messages (value) {
       if (value) {
-        value.forEach(message => {
-          if (!message.displayed) {
+        value.forEach(msg => {
+          if (!msg.displayed) {
+            this.markMessage(msg)
             this.$message({
-              type: message.type,
-              message: message.message,
-              duration: message.timeout,
+              type: msg.type,
+              message: msg.message,
+              duration: msg.timeout,
               showClose: true,
-              onClose: this.removeMessageNow,
-              customClass: message.id
+              onClose: this.removeMessage,
+              customClass: msg.id
             })
-            this.removeMessage(message)
           }
         })
-      }
-    },
-    error (value) {
-      if (value) {
-        this.$message({type: 'error', message: value, showClose: true, duration: 10000})
-        this.clearError(1000)
       }
     }
   },
   methods: {
-    ...mapActions(['clearError', 'addMessage', 'removeMessage', 'removeMessageNow'])
+    ...mapMutations('Alerts', ['clearError', 'removeMessage', 'markMessage'])
   }
 }
 </script>

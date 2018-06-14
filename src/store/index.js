@@ -2,17 +2,18 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
-import user from './user'
-import shared from './shared/shared'
-import messages from './shared/messages'
+import Shared from './Shared'
+import User from './User'
+import Alerts from './Alerts'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   plugins: [createPersistedState({storage: window.sessionStorage})],
+  strict: process.env.NODE_ENV !== 'production',
   modules: {
-    shared,
-    messages,
-    user
+    Shared,
+    User,
+    Alerts
   }
 })
